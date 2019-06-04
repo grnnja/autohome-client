@@ -1,0 +1,11 @@
+.red-background {
+  max-width: 100%;
+  overflow-x: hidden;
+  padding: 15px;
+  margin: 0;
+  font-size: 1em;
+  background-color: coral;
+}
+
+.slider {
+}
