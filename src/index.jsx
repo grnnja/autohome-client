@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app/components/app'
+
+import App from './components/App/App';
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
-module.hot.accept()
+module.hot.accept();
