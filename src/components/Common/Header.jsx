@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -8,20 +8,22 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import NavigationDrawer from './NavigationDrawer';
 
-const useStyles = makeStyles(theme => {
-  console.log('theme', theme);
-  ({
-
-})});
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 export default function Header(props) {
   const classes = useStyles(props);
-  console.log('root class', classes);
+  const [open, setOpen] = useState(false);
+  const handleNavigationDrawerOpen = () => setOpen(true);
+  const handleNavigationDrawerClose = () => setOpen(false);
   return (
     <div className={classes.root}>
-      <AppBar>
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton>
+          <IconButton color="inherit" className={classes.button} aria-label="open menu" onClick={handleNavigationDrawerOpen}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit">
@@ -29,7 +31,7 @@ export default function Header(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <NavigationDrawer />
+      <NavigationDrawer onOpen={handleNavigationDrawerOpen} onClose={handleNavigationDrawerClose} open={open}/>
     </div>
   );
-};
+}

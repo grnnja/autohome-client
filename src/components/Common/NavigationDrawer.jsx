@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SwipeableDrawer, Typography } from '@material-ui/core';
 
 const NavigationDrawer = (props) => {
-  const [open, setOpen] = useState(true);
+  const { onClose, onOpen, open } = props;
   return (
     <div>
       <SwipeableDrawer
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
+        onClose={onClose}
+        onOpen={onOpen}
         open={open}
       >
         <Typography color="inherit">

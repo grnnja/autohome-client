@@ -78,7 +78,7 @@ export default function App() {
     },
   });
   theme = responsiveFontSizes(theme);
-  console.log('theme in app', theme)
+  console.log('theme in app', theme);
   return (
     <ThemeProvider theme={theme}>
       <Router>
