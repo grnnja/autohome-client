@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const dotenv = require('dotenv');
-
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = () => {
   // call dotenv and it will return an Object with a parsed key
@@ -16,6 +16,7 @@ module.exports = () => {
     return output;
   }, {});
 
+  // to enable webpack analyzer set mode to server
   return ({
     entry: ['./src/index.jsx'],
     output: {
@@ -29,6 +30,9 @@ module.exports = () => {
       new ErrorOverlayPlugin(),
       new MiniCssExtractPlugin({
         filename: 'style.css',
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'disabled',
       }),
     ],
     devtool: 'cheap-module-source-map',

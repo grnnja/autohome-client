@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // import axios from 'axios';
+import  CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import './App.css';
+import teal from '@material-ui/core/colors/teal';
 
+import './App.css';
 import Header from '../Common/Header';
 
 export default function App() {
@@ -59,11 +61,34 @@ export default function App() {
   //       {JSON.stringify(buttonState)}
   //     </div>
   //   );
-  let theme = createMuiTheme({
+  let darkTheme = createMuiTheme({
     palette: {
       type: 'dark',
       primary: {
-        main: '#272727',
+        main: teal['200'],
+      },
+      secondary: {
+        light: '#0066ff',
+        main: '#0044ff',
+        // dark: will be calculated from palette.secondary.main,
+        contrastText: '#ffcc00',
+      },
+      background: {
+        default: '#121212',
+        paper: '#1d1d1d',
+      },
+      typography: {
+        useNextVariants: true,
+        suppressDeprecationWarnings: true,
+      },
+    },
+  });
+  darkTheme = responsiveFontSizes(darkTheme);
+  let lightTheme = createMuiTheme({
+    palette: {
+      type: 'light',
+      primary: {
+        main: teal['400'],
       },
       secondary: {
         light: '#0066ff',
@@ -75,12 +100,16 @@ export default function App() {
         useNextVariants: true,
         suppressDeprecationWarnings: true,
       },
+      background: {
+        default: '#FFF',
+      },
     },
   });
-  theme = responsiveFontSizes(theme);
-  console.log('theme in app', theme);
+  lightTheme = responsiveFontSizes(lightTheme);
+  console.log('dark theme: ', darkTheme);
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={'light' === 'light' ? lightTheme : darkTheme}>
+      <CssBaseline />
       <Router>
         <Header />
       </Router>
