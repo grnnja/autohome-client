@@ -1,13 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // import axios from 'axios';
-import  CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme, responsiveFontSizes, useTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import teal from '@material-ui/core/colors/teal';
 
 import './App.css';
-import Header from '../Common/Header';
+import withHeaderAndNavigationDrawer from './withHeaderAndNavigationDrawer';
+import Settings from '../Pages/Settings/Settings';
+
+const WrappedSettings = withHeaderAndNavigationDrawer(Settings);
+
+const drawerWidth = 240;
 
 export default function App() {
   // constructor(props) {
@@ -62,6 +68,7 @@ export default function App() {
   //     </div>
   //   );
   let darkTheme = createMuiTheme({
+    drawerWidth,
     palette: {
       type: 'dark',
       primary: {
@@ -85,6 +92,7 @@ export default function App() {
   });
   darkTheme = responsiveFontSizes(darkTheme);
   let lightTheme = createMuiTheme({
+    drawerWidth,
     palette: {
       type: 'light',
       primary: {
@@ -111,7 +119,7 @@ export default function App() {
     <ThemeProvider theme={'light' === 'light' ? lightTheme : darkTheme}>
       <CssBaseline />
       <Router>
-        <Header />
+        <WrappedSettings />
       </Router>
     </ThemeProvider>
   );
