@@ -9,9 +9,10 @@ import NavigationDrawerContent from './NavigationDrawerContent';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
   },
   drawer: {
+  },
+  drawerPaper: {
     width: theme.drawerWidth,
   },
 }));
@@ -27,6 +28,9 @@ const NavigationDrawer = (props) => {
           onClose={onClose}
           onOpen={onOpen}
           open={open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
           ModalProps={{
             keepMounted: true,
           }}
@@ -35,10 +39,21 @@ const NavigationDrawer = (props) => {
         </SwipeableDrawer>
       </Hidden>
       <Hidden xsDown>
+        {/* I have not idea why and it wasnt in the material ui documentation but if you dont put
+        classes={{
+          paper: classes.drawerPaper
+        }}
+        with classes.drawerpaper styled with width: 240 (or however big the drawe is), the scrollbar
+        on the drawer goes over the size of the drawer and obscures text
+        this was in the example drawer from material ui but not mentioned in any of the documentation
+        i could find. I've never used this classes thing so idk why it is used here */}
         <Drawer
           variant="persistent"
           anchor="left"
           open
+          classes={{
+            paper: classes.drawerPaper,
+          }}
         >
           <NavigationDrawerContent />
         </Drawer>

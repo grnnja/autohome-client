@@ -116,7 +116,7 @@ export default function App() {
   lightTheme = responsiveFontSizes(lightTheme);
   console.log('dark theme: ', darkTheme);
   return (
-    <ThemeProvider theme={'light' === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={'dark' === 'light' ? lightTheme : darkTheme}>
       <CssBaseline />
       <Router>
         <WrappedSettings />
