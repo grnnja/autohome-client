@@ -8,14 +8,13 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import teal from '@material-ui/core/colors/teal';
 
 import './App.css';
-import withHeaderAndNavigationDrawer from './withHeaderAndNavigationDrawer';
+import HeaderAndNavigationDrawer from './HeaderAndNavigationDrawer';
 import Settings from '../Pages/Settings/Settings';
-
-const WrappedSettings = withHeaderAndNavigationDrawer(Settings);
 
 const drawerWidth = 240;
 
-export default function App() {
+const App = () => {
+  const viewportIsBiggerThanSmall = useMediaQuery('(min-width:600px)');
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -118,10 +117,17 @@ export default function App() {
   return (
     <ThemeProvider theme={'dark' === 'light' ? lightTheme : darkTheme}>
       <CssBaseline />
-      <Router>
-        <WrappedSettings />
-      </Router>
+      <HeaderAndNavigationDrawer />
+      <div className={viewportIsBiggerThanSmall ? 'router' : ''}>
+        <Router>
+          dddddd
+          <Route path="/" component={"div"} />
+          <Route path="/settings" component={Settings} />
+        </Router>
+      </div>
     </ThemeProvider>
   );
-}
+};
 // }
+
+export default App;

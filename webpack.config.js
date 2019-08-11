@@ -4,6 +4,7 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const dotenv = require('dotenv');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = () => {
   // call dotenv and it will return an Object with a parsed key
@@ -34,6 +35,11 @@ module.exports = () => {
       new BundleAnalyzerPlugin({
         analyzerMode: 'disabled',
       }),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        filename: './dist/index.html',
+        title: 'autohome',
+      }),
     ],
     devtool: 'cheap-module-source-map',
     devServer: {
@@ -42,6 +48,7 @@ module.exports = () => {
       // make sure this ip address is right otherwise npm start throws EADDRNOTAVAIL
       host: '192.168.1.83',
       port: 1234,
+      historyApiFallback: true,
     },
     module: {
       rules: [
