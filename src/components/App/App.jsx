@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, responsiveFontSizes, useTheme } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import teal from '@material-ui/core/colors/teal';
 import './App.css';
 import HeaderAndNavigationDrawer from './HeaderAndNavigationDrawer';
 import Settings from '../Pages/Settings/Settings';
+import Dashboard from '../Pages/Dashboard/Dashboard';
 
 const drawerWidth = 240;
 
@@ -117,12 +118,15 @@ const App = () => {
   return (
     <ThemeProvider theme={'dark' === 'light' ? lightTheme : darkTheme}>
       <CssBaseline />
-      <HeaderAndNavigationDrawer />
-      <div className={viewportIsBiggerThanSmall ? 'router' : ''}>
+      <div>
         <Router>
-          dddddd
-          <Route path="/" component={"div"} />
-          <Route path="/settings" component={Settings} />
+          <HeaderAndNavigationDrawer />
+          <div className={viewportIsBiggerThanSmall ? 'router' : ''}>
+            <Switch>
+              <Route path="/settings" component={Settings} />
+              <Route path="/" component={Dashboard} />
+            </Switch>
+          </div>
         </Router>
       </div>
     </ThemeProvider>
