@@ -2,21 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const dotenv = require('dotenv');
+const Dotenv = require('dotenv-webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = () => {
-  // call dotenv and it will return an Object with a parsed key
-  const env = dotenv.config().parsed;
-
-  // reduce it to a nice object, the same as before
-  const envKeys = Object.keys(env).reduce((prev, next) => {
-    const output = prev;
-    output[`process.env.${next}`] = JSON.stringify(env[next]);
-    return output;
-  }, {});
-
   // to enable webpack analyzer set mode to server
   return ({
     entry: ['./src/index.jsx'],
@@ -26,7 +16,7 @@ module.exports = () => {
       filename: 'bundle.js',
     },
     plugins: [
-      new webpack.DefinePlugin(envKeys),
+      new Dotenv(),
       new webpack.HotModuleReplacementPlugin(),
       new ErrorOverlayPlugin(),
       new MiniCssExtractPlugin({
@@ -46,7 +36,9 @@ module.exports = () => {
       contentBase: './dist',
       hot: true,
       // make sure this ip address is right otherwise npm start throws EADDRNOTAVAIL
-      host: '192.168.1.83',
+      // host: '192.168.1.83',
+      // setting it to 0.0.0.0 uses the current ip address
+      host: '0.0.0.0',
       port: 1234,
       historyApiFallback: true,
     },
