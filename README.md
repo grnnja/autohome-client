@@ -9,7 +9,9 @@
 * Planned: a cool graph to see temperature history over many years
 * Dark and light theme
 ## Installation and Usage
-```git clone https://github.com/grnnja/autohome-client.git
+```
+git clone https://github.com/grnnja/autohome-client.git
 cd autohome-client
 npm install
-npm start```
+npm start
+```
